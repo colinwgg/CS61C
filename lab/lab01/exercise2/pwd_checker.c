@@ -1,5 +1,5 @@
-#include <assert.h>
 #include <string.h>
+#include <assert.h>
 #include "pwd_checker.h"
 
 /*
@@ -86,6 +86,5 @@ bool check_password(const char *first_name, const char *last_name, const char *p
     name = check_name(first_name, last_name, password);
     number = check_number(password);
     upper = check_upper(password);
-    
     return (lower && length && name && upper && number);
 }
