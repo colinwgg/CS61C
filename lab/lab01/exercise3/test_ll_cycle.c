@@ -8,7 +8,7 @@ int main(void) {
 
     int i;
     node nodes[25]; // enough to run our tests
-    for(i = 0; i < sizeof(nodes)/sizeof(node); i++) {
+    for(i = 0; i < (int)sizeof(nodes)/(int)sizeof(node); i++) {
         nodes[i].next = 0;
         nodes[i].value = 0;
     }

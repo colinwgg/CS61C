@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/CS-self learning/CS61C/lab/lab01/exercise1",
-      "program": "c:/CS-self learning/CS61C/lab/lab01/exercise1/build/Debug/outDebug",
+      "cwd": "c:/CS-self learning/CS61C/lab/lab01/exercise3",
+      "program": "c:/CS-self learning/CS61C/lab/lab01/exercise3/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
