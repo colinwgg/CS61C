@@ -23,8 +23,34 @@ static void update_head(game_state_t* state, unsigned int snum);
 
 /* Task 1 */
 game_state_t* create_default_state() {
-  // TODO: Implement this function.
-  return NULL;
+	game_state_t* gstp = (game_state_t *)malloc(sizeof(game_state_t));
+	gstp->num_rows = 18;
+	gstp->board = (char **)malloc(18 * sizeof(char *));
+	for (int i = 0; i < 18; i++) {
+		gstp->board[i] = malloc(21 * sizeof(char));
+    	for (int j = 0; j < 21; j++) {
+			if (j == 20) {
+				gstp->board[i][j] = '\0';
+			} else if (j == 0 || j == 19 || i == 0 || i == 17) {
+				gstp->board[i][j] = '#';
+			} else {
+				gstp->board[i][j] = ' ';
+			}
+		}
+    }
+	set_board_at(gstp, 2, 9, '*');
+	set_board_at(gstp, 2, 2, 'd');
+	set_board_at(gstp, 2, 3, '>');
+	set_board_at(gstp, 2, 4, 'D');
+	gstp->num_snakes = 1;
+	gstp->snakes = (snake_t *)malloc(sizeof(snake_t) * gstp->num_snakes);
+	gstp->snakes->tail_col = 2;
+	gstp->snakes->tail_row = 2;
+	gstp->snakes->head_col = 4;
+	gstp->snakes->head_row = 2;
+	gstp->snakes->live = true;
+	
+	return gstp;
 }
 
 /* Task 2 */
