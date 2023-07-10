@@ -55,8 +55,12 @@ game_state_t* create_default_state() {
 
 /* Task 2 */
 void free_state(game_state_t* state) {
-  // TODO: Implement this function.
-  return;
+  free(state->snakes);
+  for (int i = 0; i < state->num_rows; i++) {
+	free(state->board[i]);
+  }
+  free(state->board);
+  free(state);
 }
 
 /* Task 3 */
