@@ -97,13 +97,39 @@ bool test_is_vowel() {
 /* Task 4.1 */
 
 bool test_is_tail() {
-  // TODO: Implement this function.
-  return true;
+	char testcase_1 = 'w';
+	bool output_1 = is_tail(testcase_1);
+	if (!assert_true("output_1", output_1)) {
+		return false;
+	}
+	char testcase_2 = 't';
+	bool output_2 = is_tail(testcase_2);
+	if (!assert_false("output_2", output_2)) {
+		return false;
+	}
+	return true;
 }
 
 bool test_is_head() {
-  // TODO: Implement this function.
-  return true;
+    char testcase_1 = 'W';
+	bool output_1 = is_head(testcase_1);
+	if (!assert_true("output_1", output_1)) {
+		printf("test1 failed\n");
+		return false;
+	}
+	char testcase_2 = 'x';
+	bool output_2 = is_head(testcase_2);
+	if (!assert_true("output_2", output_2)) {
+		printf("test2 failed\n");
+		return false;
+	}
+	char testcase_3 = 't';
+	bool output_3 = is_head(testcase_3);
+	if (!assert_false("output_3", output_3)) {
+		printf("test3 failed\n");
+		return false;
+	}
+	return true;
 }
 
 bool test_is_snake() {
@@ -112,8 +138,25 @@ bool test_is_snake() {
 }
 
 bool test_body_to_tail() {
-  // TODO: Implement this function.
-  return true;
+    char testcase_1 = '^';
+	char output_1 = body_to_tail(testcase_1);
+	if (!assert_equals_char("output_1", 'w', output_1)) {
+		printf("test1 failed\n");
+		return false;
+	}
+	char testcase_2 = '>';
+	char output_2 = body_to_tail(testcase_2);
+	if (!assert_equals_char("output_2", 'd', output_2)) {
+		printf("test2 failed\n");
+		return false;
+	}
+	char testcase_3 = 'v';
+	char output_3 = body_to_tail(testcase_3);
+	if (!assert_equals_char("output_3", 's', output_3)) {
+		printf("test3 failed\n");
+		return false;
+	}
+	return true;
 }
 
 bool test_head_to_body() {
@@ -122,8 +165,21 @@ bool test_head_to_body() {
 }
 
 bool test_get_next_x() {
-  // TODO: Implement this function.
-  return true;
+    char testcase_1_char = 's';
+	unsigned int testcase_1_int = 5;
+	unsigned int output_1 = get_next_row(testcase_1_int, testcase_1_char);
+	if (!assert_equals_unsigned_int("output_1", 6, output_1)) {
+		printf("test1 failed\n");
+		return false;
+	}
+	char testcase_2_char = '^';
+	unsigned int testcase_2_int = 5;
+	unsigned int output_2 = get_next_row(testcase_2_int, testcase_2_char);
+	if (!assert_equals_unsigned_int("output_1", 4, output_2)) {
+		printf("test2 failed\n");
+		return false;
+	}
+	return true;
 }
 
 bool test_get_next_y() {

@@ -106,8 +106,7 @@ static void set_board_at(game_state_t* state, unsigned int row, unsigned int col
   Returns false otherwise.
 */
 static bool is_tail(char c) {
-  // TODO: Implement this function.
-  return true;
+	return c == 'w' || c == 'a' || c == 's' || c == 'd';
 }
 
 /*
@@ -116,8 +115,7 @@ static bool is_tail(char c) {
   Returns false otherwise.
 */
 static bool is_head(char c) {
-  // TODO: Implement this function.
-  return true;
+	return c == 'W' || c == 'A' || c == 'S' || c == 'D' || c == 'x';
 }
 
 /*
@@ -125,8 +123,9 @@ static bool is_head(char c) {
   The snake consists of these characters: "wasd^<v>WASDx"
 */
 static bool is_snake(char c) {
-  // TODO: Implement this function.
-  return true;
+  return c == 'w' || c == 'a' || c == 's' || c == 'd' 
+  || c == 'W' || c == 'A' || c == 'S' || c == 'D' || c == 'x'
+  || c == '^' || c == '<' || c == 'v' || c == '>';
 }
 
 /*
@@ -135,8 +134,24 @@ static bool is_snake(char c) {
   tail ("wasd").
 */
 static char body_to_tail(char c) {
-  // TODO: Implement this function.
-  return '?';
+	char convert = ' ';
+  	switch (c) {
+		case '^':
+			convert = 'w';
+			break;
+		case '<':
+			convert = 'a';
+			break;
+		case 'v':
+			convert = 's';
+			break;
+		case '>':
+			convert = 'd';
+			break;
+		default:
+			break;
+  	}
+	return convert;
 }
 
 /*
@@ -145,8 +160,24 @@ static char body_to_tail(char c) {
   body ("^<v>").
 */
 static char head_to_body(char c) {
-  // TODO: Implement this function.
-  return '?';
+  char convert = ' ';
+  	switch (c) {
+		case 'W':
+			convert = '^';
+			break;
+		case 'A':
+			convert = '<';
+			break;
+		case 'S':
+			convert = 'v';
+			break;
+		case 'D':
+			convert = '>';
+			break;
+		default:
+			break;
+  	}
+	return convert;
 }
 
 /*
@@ -155,8 +186,12 @@ static char head_to_body(char c) {
   Returns cur_row otherwise.
 */
 static unsigned int get_next_row(unsigned int cur_row, char c) {
-  // TODO: Implement this function.
-  return cur_row;
+	if (c == 'v' || c == 's' || c == 'S') {
+		return cur_row + 1;
+	} else if (c == '^' || c == 'w' || c == 'W') {
+		return cur_row - 1;
+	}
+	return cur_row;
 }
 
 /*
@@ -165,8 +200,12 @@ static unsigned int get_next_row(unsigned int cur_row, char c) {
   Returns cur_col otherwise.
 */
 static unsigned int get_next_col(unsigned int cur_col, char c) {
-  // TODO: Implement this function.
-  return cur_col;
+	if (c == '>' || c == 'd' || c == 'D') {
+		return cur_col + 1;
+	} else if (c == '<' || c == 'a' || c == 'A') {
+		return cur_col - 1;
+	}
+	return cur_col;
 }
 
 /*
