@@ -236,8 +236,16 @@ static char next_square(game_state_t* state, unsigned int snum) {
   Note that this function ignores food, walls, and snake bodies when moving the head.
 */
 static void update_head(game_state_t* state, unsigned int snum) {
-  // TODO: Implement this function.
-  return;
+	unsigned int head_row = state->snakes[snum].head_row;
+	unsigned int head_col = state->snakes[snum].head_col;
+	char head = get_board_at(state, head_row, head_col);
+	unsigned int next_row = get_next_row(head_row, head);
+	unsigned int next_col = get_next_col(head_col, head);
+	state->board[head_row][head_col] = head_to_body(state->board[head_row][head_col]);
+	state->board[next_row][next_col] = head;
+	state->snakes[snum].head_row = next_row;
+	state->snakes[snum].head_col = next_col;
+	return;
 }
 
 /*
