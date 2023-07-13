@@ -274,7 +274,7 @@ static void update_tail(game_state_t* state, unsigned int snum) {
 /* Task 4.5 */
 void update_state(game_state_t* state, int (*add_food)(game_state_t* state)) {
 	unsigned int snum = state->num_snakes;
-	for (int i = 0; i < snum; i++) {
+	for (unsigned int i = 0; i < snum; i++) {
 		char next_sq = next_square(state, i);
 		if (is_snake(next_sq)) {
 			state->board[state->snakes[i].head_row][state->snakes[i].head_col] = 'x';
@@ -322,8 +322,8 @@ game_state_t* load_board(char* filename) {
 		char *buff = malloc(1024 * 1024 * sizeof(char));
 		fgets(buff, 1024 * 1024, fp);
 		gs->board[i] = malloc(sizeof(char) * (strlen(buff) + 1));
-		strcpy(gs->board[i], buff, strlen(buff));
-		gs->board[i][strlen(buff)];
+		strcpy(gs->board[i], buff);
+		gs->board[i][strlen(buff)] = '\0';
 		free(buff);
 	}
 	return gs;
@@ -359,8 +359,8 @@ game_state_t* initialize_snakes(game_state_t* state) {
 	unsigned int snum = 0;
 	unsigned int *tail_rows = malloc(1000 * sizeof(unsigned int));
 	unsigned int *tail_cols = malloc(1000 * sizeof(unsigned int));
-	for (int i = 0; i < state->num_rows; i++) {
-		for (int j = 0; j < strlen(state->board[i]); j++) {
+	for (unsigned int i = 0; i < state->num_rows; i++) {
+		for (unsigned int j = 0; j < strlen(state->board[i]); j++) {
 			char cur_char = state->board[i][j];
 			if (is_tail(cur_char)) {
 				tail_rows[snum] = i;
@@ -371,7 +371,7 @@ game_state_t* initialize_snakes(game_state_t* state) {
 	}
 	state->snakes = malloc((snum) * sizeof(snake_t));
 	state->num_snakes = snum;
-	for (int i = 0; i < snum; i++) {
+	for (unsigned int i = 0; i < snum; i++) {
 		state->snakes[i].tail_row = tail_rows[i];
 		state->snakes[i].tail_col = tail_cols[i];
 		state->snakes[i].live = true;
