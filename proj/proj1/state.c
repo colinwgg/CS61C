@@ -338,12 +338,20 @@ game_state_t* load_board(char* filename) {
   fill in the head row and col in the struct.
 */
 static void find_head(game_state_t* state, unsigned int snum) {
-  // TODO: Implement this function.
-  return;
+	unsigned int cur_row = state->snakes[snum].tail_row;
+	unsigned int cur_col = state->snakes[snum].tail_col;
+	char cur_char = state->board[cur_row][cur_col];
+	while (!is_head(cur_char)) {
+		cur_row = get_next_row(cur_row, cur_char);
+		cur_col = get_next_col(cur_col, cur_char);
+		cur_char = state->board[cur_row][cur_col];
+	}
+	state->snakes[snum].head_row = cur_row;
+	state->snakes[snum].head_col = cur_col;
+	return;
 }
 
 /* Task 6.2 */
 game_state_t* initialize_snakes(game_state_t* state) {
-  // TODO: Implement this function.
-  return NULL;
+	
 }
