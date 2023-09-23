@@ -27,11 +27,11 @@ main:
 # The return value should be stored in a0
 factorial:
     # YOUR CODE HERE
-    addi t0, x0, 1
+    addi t0, x0, 1 # res = 1
 loop_outer:
     beq a0, x0, finish_outer
+    add t1, x0, x0 # tmp = 0
     addi a1, a0, -1
-    add t1, x0, x0
 loop_inner:
     beq a1, x0, finish_inner
     add t1, t1, t0
@@ -42,7 +42,7 @@ finish_inner:
     addi a0, a0, -1
     j loop_outer
 finish_outer:
-    add a0, t0, x0
+    add a0, x0, t0
     # This is how you return from a function. You'll learn more about this later.
     # This should be the last line in your program.
     jr ra
