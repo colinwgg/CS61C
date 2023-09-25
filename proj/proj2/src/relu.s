@@ -42,7 +42,6 @@ loop_start:
     j loop_start
 
 loop_continue:
-    bge t0, a1, loop_end
     sw x0, 0(t1)
     addi t0, t0, 1
     j loop_start
