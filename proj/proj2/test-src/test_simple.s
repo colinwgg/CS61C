@@ -1,40 +1,46 @@
 .import ../src/utils.s
-.import ../src/../coverage-src/initialize_zero.s
+.import ../src/../coverage-src/zero_one_loss.s
 
 .data
 .align 4
-m0: .word 0 0 0 0 0 0 0 0 0
-msg0: .asciiz "Expected array pointed to by a0 to be:\n0 0 0 0 0 0 0 0 0\nInstead it is:\n"
+m0: .word 1 2 3 4 5 6 7 8 9
+.align 4
+m1: .word 1 6 1 6 1 6 1 6 1
+.align 4
+m2: .word -1 -1 -1 -1 -1 -1 -1 -1 -1
+.align 4
+m3: .word 1 0 0 0 0 1 0 0 0
+msg0: .asciiz "Expected m2 to be:\n1 0 0 0 0 1 0 0 0\nInstead it is:\n"
 
 .globl main_test
 .text
 # main_test function for testing
 main_test:
-    # Prologue
-    addi sp, sp, -8
-    sw ra, 0(sp)
-    sw s0, 4(sp)
 
+    # load address to array m0 into a0
+    la a0 m0
 
-    # load 9 into a0
-    li a0 9
+    # load address to array m1 into a1
+    la a1 m1
 
-    # call initialize_zero function
-    jal ra initialize_zero
+    # load 9 into a2
+    li a2 9
 
-    # save all return values in the save registers
-    mv s0 a0
+    # load address to array m2 into a3
+    la a3 m2
 
+    # call zero_one_loss function
+    jal ra zero_one_loss
 
     ##################################
-    # check that array pointed to by a0 == [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    # check that m2 == [1, 0, 0, 0, 0, 1, 0, 0, 0]
     ##################################
     # a0: exit code
     li a0, 2
     # a1: expected data
-    la a1, m0
+    la a1, m3
     # a2: actual data
-    mv a2 s0
+    la a2, m2
     # a3: length
     li a3, 9
     # a4: error message
@@ -42,10 +48,5 @@ main_test:
     jal compare_int_array
 
     # exit normally
-    # Epilogue
-    lw ra, 0(sp)
-    lw s0, 4(sp)
-    addi sp, sp, 8
-
     li a0 0
     jal exit

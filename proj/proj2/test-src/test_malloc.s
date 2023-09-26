@@ -8,8 +8,8 @@
 # main_test function for testing
 main_test:
 
-    # load 1061109567 into a0
-    li a0 1061109567
+    # load 2147483647 into a0
+    li a0 2147483647
 
     # call initialize_zero function
     jal ra initialize_zero
