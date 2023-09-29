@@ -38,7 +38,7 @@ read_matrix:
     sw a1, 4(sp)
     sw a2, 8(sp)
     li a1, 0
-    jal fopen # test j fopen later
+    jal fopen 
     li t0, -1
     beq a0, t0, fopen_error
     mv s0, a0 # s0 -> file descriptor
